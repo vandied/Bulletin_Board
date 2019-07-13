@@ -1,42 +1,10 @@
 import React, {Component} from 'react'
 import './style.css'
 
-var announArray = [
-    {
-        title: 'Продам собаку',
-        text: 'Станет отличным другом, к лотку приучена',
-        phone: '+7 (901) 100-00-00',
-        city: 'Москва'
-    },
-    {
-        title: 'Продам поводок',
-        text: 'Цвет чёрный, размер М, подходит для собак любых пород, кроме декоративных',
-        phone: '+7 (901) 100-00-00',
-        city: 'Москва'
-    }
-];
-
 class EmptyForm extends Component{
-    constructor(){
-        super();
-        this.state = {
-            announcements: announArray,
-            newAnnoun: {
-                title: '',
-                text: '',
-                phone: '',
-                city: ''
-            } 
-        };
-
-    }
     render(){
         return(
-        <div className="addAnnouncement">
-            <h1>
-                Подать объявление
-            </h1>
-            <form encType="multitype/form-data" onSubmit={this.saveData}>
+            <form encType="multitype/form-data" id='emptyForm'>
             <div className="formField">
                 <label htmlFor="title">Заголовок</label> <br/>
                 <input className="input oneLineField" type="text" name="title" placeholder=" " minLength="3" maxLength="140" required/>
@@ -66,7 +34,6 @@ class EmptyForm extends Component{
                 <button className="sendButton" type="submit">Подать</button>
             </div>   
             </form>
-        </div>
         )
     }
 }
