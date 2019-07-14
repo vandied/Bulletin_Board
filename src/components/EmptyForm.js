@@ -5,7 +5,6 @@ class EmptyForm extends Component{
     constructor(props){
         super(props);
         this.state = {
-            id: '',
 			title: '',
 			text: '',
 			phone: '',
@@ -13,12 +12,10 @@ class EmptyForm extends Component{
     }
 }
     handleChange(e) {
-        console.log(e.target.name)
         this.setState({
             [e.target.name]: e.target.value    
         })
     }
-
     handleSubmit(e){
         e.preventDefault();
         const announ = {
@@ -30,11 +27,20 @@ class EmptyForm extends Component{
         }
         var announArray = JSON.parse(localStorage.getItem("announcements") || []);
         announArray.push(announ);
+        localStorage.setItem("announcements", JSON.stringify(announArray));
         console.log(announArray);
+        this.setState({
+			title: '',
+			text: '',
+			phone: '',
+			city: ''
+       })
     }
+    
+
     render(){
         return(
-            <form onSubmit={this.handleSubmit} 
+            <form onSubmit={this.handleSubmit.bind(this)} 
                   encType="multitype/form-data" 
                   id="emptyForm">
             <div className="formField">
