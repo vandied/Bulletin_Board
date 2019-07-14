@@ -2,31 +2,79 @@ import React, {Component} from 'react'
 import './style.css'
 
 class EmptyForm extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            id: '',
+			title: '',
+			text: '',
+			phone: '',
+			city: ''
+    }
+}
+    handleChange(e) {
+        console.log(e.target.name)
+        this.setState({
+            [e.target.name]: e.target.value    
+        })
+    }
+
+    handleSubmit(e){
+        e.preventDefault();
+        const announ = {
+            id: new Date().getTime().toString(),
+            title: e.target.title.value,
+            text: e.target.text.value,
+            phone: e.target.phone.value,
+            city: e.target.city.value 
+        }
+        var announArray = JSON.parse(localStorage.getItem("announcements") || []);
+        announArray.push(announ);
+        console.log(announArray);
+    }
     render(){
         return(
-            <form encType="multitype/form-data" id='emptyForm'>
+            <form onSubmit={this.handleSubmit} 
+                  encType="multitype/form-data" 
+                  id="emptyForm">
             <div className="formField">
                 <label htmlFor="title">Заголовок</label> <br/>
-                <input className="input oneLineField" type="text" name="title" placeholder=" " minLength="3" maxLength="140" required/>
+                <input className="input oneLineField" 
+                       type="text" 
+                       name="title" 
+                       value={this.state.title}
+                       onChange={event => this.handleChange(event)}/>
                 <span className="help"></span>
             </div>
             <div className="formField">
                 <label htmlFor="text">Текст объявления</label> <br/>
-                <input className="input textField" type="text" name="text" placeholder=" " minLength="3" maxLength="300" required/>
+                <input className="input textField" 
+                       type="text" 
+                       name="text" 
+                       value={this.state.text}
+                       onChange={event => this.handleChange(event)}/>
                 <span className="help"></span>
             </div>
             <div className="formField">
                 <label htmlFor="phone">Телефон</label> <br/>
-                <input className="input oneLineField" type="tel" name="phone" required placeholder=" "  minLength="18" maxLength="18"/>
+                <input className="input oneLineField" 
+                       type="tel" 
+                       name="phone" 
+                       value={this.state.phone}
+                       onChange={event => this.handleChange(event)}/>
                 <span className="help"></span>
             </div>
             <div className="formField" required>
                 <label htmlFor="city">Город</label> <br/>
-                <select className="oneLineField"  name="city" size="1">
+                <select className="oneLineField"  
+                        name="city" 
+                        size="1"
+                        value={this.state.city}
+                       onChange={event => this.handleChange(event)}>
                     <option className="defOption" value="" ></option>
-                    <option value="msc">Москва</option>
-                    <option value="khv">Хабаровск</option>
-                    <option value="csy">Чебоксары</option>
+                    <option value="Москва">Москва</option>
+                    <option value="Хабаровск">Хабаровск</option>
+                    <option value="Чебоксары">Чебоксары</option>
                 </select>
                 <span className="help"></span>
             </div>
