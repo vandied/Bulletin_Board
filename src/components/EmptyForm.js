@@ -11,6 +11,7 @@ class EmptyForm extends Component{
 			city: ''
     }
 }
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value    
@@ -28,7 +29,7 @@ class EmptyForm extends Component{
         var announArray = JSON.parse(localStorage.getItem("announcements") || []);
         announArray.push(announ);
         localStorage.setItem("announcements", JSON.stringify(announArray));
-        console.log(announArray);
+        this.props.updateData(announArray);
         this.setState({
 			title: '',
 			text: '',

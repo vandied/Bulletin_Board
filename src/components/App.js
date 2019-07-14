@@ -20,19 +20,33 @@ var announArray = [
 ];
 localStorage.setItem("announcements", JSON.stringify(announArray));
 class App extends Component{
-	
+	state = {
+		dataset: JSON.parse(localStorage.getItem("announcements") || []),
+	}
+	updateData = (value) => {
+		this.setState({ 
+			dataset: value,
+		});
+	 }
+	 componentDidMount() {
+		}
+  	componentDidUpdate(){
+
+  	}
+
     render(){
         return (
 			<div className='container'>
+				{this.state.dataset.length}
 				<div className="addAnnouncement">
 					<h1>
 						Подать объявление
 					</h1>
-					<EmptyForm/> 
+					<EmptyForm updateData={this.updateData}/> 
 				</div>
 				<div className="existsForms">
 					<h3 className="announcement__title">Объявление</h3>
-					<ListForm />
+					<ListForm listAnnoun = {this.state.dataset}/>
 				</div>
 			</div>
     )
