@@ -1,14 +1,8 @@
 import React, {Component} from 'react'
 
 class Form extends Component {
-    // constructor(props){
-    //     super(props)
-    //     this.state={
-    //         count: 0
-    //     }
-	// }
   render(){
-	const {announcement, onButtonClick} = this.props
+	const {announcement, onButtonClickDelete, onButtonClickEdit} = this.props
 	  		
   	  return (
         <div className="form">
@@ -20,20 +14,18 @@ class Form extends Component {
 					<div className="form__item announ__info">
 						<div className="info">
 							<div className="info__item">
-								<img src={require("../icon-1.svg")} alt={"phone"}/>
-								<span>{announcement.phone}</span>
+								<span><img className="info__item__img" src={require("../icon-2.svg")} alt={"phone"}/>{announcement.phone}</span>
 							</div>
 							<div className="info__item">
-								<img src={require("../icon-2.svg")} alt={"phone"}/>
-								<span>{announcement.city}</span>
+								<span><img className="info__item__img" src={require("../icon-1.svg")} alt={"phone"}/>{announcement.city}</span>
 							</div>
 						</div>
 						<div className="btns">
 						<div className="edit">
-							<button className="btn">Редактировать</button>
+							<button className="btn" onClick={onButtonClickEdit}>Редактировать</button>
 						</div>
 						<div className="delete">
-							<button className="btn btn--red" onClick={onButtonClick}>Удалить</button>
+							<button className="btn btn--red" onClick={onButtonClickDelete}>Удалить</button>
 						</div>
 						</div>
 					</div>

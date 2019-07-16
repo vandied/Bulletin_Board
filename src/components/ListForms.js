@@ -1,26 +1,24 @@
 import React, {Component} from 'react'
 import Form from './Form'
 import './style.css'
-
 export default class ListForm extends Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			forms: this.props.listAnnoun
+			forms: this.props.listAnnoun,
+			editform: this.props.editItem
 		};
 	}
 	componentDidMount() {
   	}
 	componentDidUpdate(){
-
 	}
 	componentWillReceiveProps(nextProps){
 		if(nextProps.listAnnoun!==this.state.forms){
-			console.log(nextProps.listAnnoun)
 			this.setState({forms: nextProps.listAnnoun})
 		}
 	}
-	handleClick(item){
+	handleClickDel(item){
 		let array = JSON.parse(localStorage.getItem("announcements") || []);
 		let index = array.findIndex(x=>x.id===item.id);
 		array.splice(index,1);
@@ -29,13 +27,16 @@ export default class ListForm extends Component {
 			forms: JSON.parse(localStorage.getItem("announcements") || [])
 		});
 	}
+	handleClickEdit(item){
+		this.props.editItem(item);
+		this.handleClickDel(item);
+	}
   render() {
-	// console.log('--',this.state.forms)
-
     const formElements = this.state.forms.map((item) =>
       <li key = {item.id} className="li_item">
         <Form announcement = {item}
-              onButtonClick={this.handleClick.bind(this,item)}/>
+			  onButtonClickDelete={this.handleClickDel.bind(this,item)}
+			  onButtonClickEdit={this.handleClickEdit.bind(this,item)}/>
       </li>)
         
       return (

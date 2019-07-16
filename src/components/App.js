@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import './style.css';
 import EmptyForm from './EmptyForm';
 import ListForm from './ListForms';
+
+// для наглядности добавила в localstorage 2 объявления
 var announArray = [
 	{
 			id: '18764382461dchash',
@@ -22,31 +24,34 @@ localStorage.setItem("announcements", JSON.stringify(announArray));
 class App extends Component{
 	state = {
 		dataset: JSON.parse(localStorage.getItem("announcements") || []),
+		editAnnoun: ''
 	}
 	updateData = (value) => {
 		this.setState({ 
-			dataset: value,
+			dataset: value
 		});
 	 }
-	 componentDidMount() {
-		}
-  	componentDidUpdate(){
-
-  	}
-
-    render(){
-        return (
+	 editData = (item) => {
+		 this.setState({
+				editAnnoun: item
+		 })
+	 }
+	componentDidMount() {
+	}
+  componentDidUpdate(){
+  }
+  	render(){
+      return (
 			<div className='container'>
-				{this.state.dataset.length}
 				<div className="addAnnouncement">
-					<h1>
+				<h1>
 						Подать объявление
 					</h1>
-					<EmptyForm updateData={this.updateData}/> 
+					<EmptyForm updateData={this.updateData} editData={this.state.editAnnoun}/> 
 				</div>
 				<div className="existsForms">
 					<h3 className="announcement__title">Объявление</h3>
-					<ListForm listAnnoun = {this.state.dataset}/>
+					<ListForm listAnnoun = {this.state.dataset} editItem={this.editData}/>
 				</div>
 			</div>
     )

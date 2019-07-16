@@ -20,28 +20,31 @@ label{
     max-width: 700px;
     margin-left: 200px;
 }
-.formField{
+.form__field{
+  display: flex;
     margin-bottom: 30px;    
 }
-.oneLineField {
+.oneline__field {
     width: 410px;
     height: 36px;
+    padding: 5px;
     object-fit: contain;
     border-radius: 3px;
     box-shadow: inset 0 1px 3px 0 rgba(27, 40, 52, 0.08);
     border: solid 1px #d4d8db;
     background-color: rgba(27, 40, 52, 0.01);
   }
-.textField{
+.text__field{
         width: 410px;
         height: 147px;
+        padding: 5px;
         object-fit: contain;
         border-radius: 3px;
         box-shadow: inset 0 1px 3px 0 rgba(27, 40, 52, 0.08);
         border: solid 1px #d4d8db;
         background-color: rgba(27, 40, 52, 0.01);
       }
-.sendButton{
+.send__button{
     width: 141px;
     height: 36px;
     object-fit: contain;
@@ -116,3 +119,28 @@ label{
     list-style: none;
     margin-bottom: 80px;
   }
+.info__item{
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+}
+.info__item__img{
+  position: absolute;
+  bottom:-3px;
+  left:0;
+}
+.form__errors{
+  margin-left: 20px;
+  margin-top: 0;
+  padding-top: 0;
+  width: 142px;
+  height: 44px;
+  font-family: SourceSansPro;
+  font-size: 14px;
+  line-height: 1.57;
+  color: #68717c;
+  text-align: top;
+}
+.alarm{
+  border-color: red;
+}
