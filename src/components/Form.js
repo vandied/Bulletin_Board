@@ -9,7 +9,7 @@ class Form extends Component {
           <div className="form__item announ">
 						<p className="form__title">{announcement.title}</p>
 						<p className="form__text">{announcement.text}</p>
-						<img src={require("../pesel.jpg")} alt=''/>
+						<img src={("http://placehold.it/330x250.jpg")} alt=''/>
 					</div>
 					<div className="form__item announ__info">
 						<div className="info">
