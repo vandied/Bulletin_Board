@@ -108,9 +108,17 @@ label{
     font-family: SourceSansPro;
     font-size: 14px;
   }
+  .btn:hover{
+    background: #2d74da;
+    color:white;
+  }
   .btn--red{
     color: #fa5e5b;
     border-color: #fa5e5b;
+  }
+  .btn--red:hover{
+    background: #fa5e5b;
+    color:white;
   }
   .delete{
     margin-top: 5px;
@@ -131,7 +139,7 @@ label{
 }
 .form__errors{
   margin-left: 20px;
-  margin-top: 0;
+  margin-top: 5px;
   padding-top: 0;
   width: 142px;
   height: 44px;

@@ -13,9 +13,11 @@ class EmptyForm extends Component {
 			titleValid: false,
       textValid: false,
 			phoneValid: false,
-			formErrors: {title:'Обязательное полe Не более 140 символов',
+			cityValid: false,
+			formErrors: {title:'Обязательное полe. Не более 140 символов',
 		   						 text:'Не более 300 символов',
-									 phone:'Обязательное поле'},
+									 phone:'Обязательное поле',
+									 city:'Обязательное поле'},
 			formValid: false,
 			editItem: this.props.editData
     }
@@ -31,9 +33,11 @@ class EmptyForm extends Component {
 				titleValid: true,
       	textValid: true,
 				phoneValid: true,
-				formValid: true
+				formValid: true,
+				cityValid: true,
+				editItem: newprops
 			})
-		
+		console.log(this.state)
 		}
 	}
 	handleChange (e) {
@@ -47,23 +51,25 @@ class EmptyForm extends Component {
     let fieldValidationErrors = this.state.formErrors;
     let titleValid = this.state.titleValid;
 		let textValid = this.state.textValid;
+		let cityValid = this.state.cityValid;
 		let phoneValid = this.state.phoneValid;
 
     switch(fieldName) {
       case 'title':
 				titleValid = (value.length >1) ;
-				console.log(titleValid);
         fieldValidationErrors.title = titleValid? 'Заполнено' : 'Заполните поле';
         break;
       case 'text':
 				textValid = (value.length >1);
-				console.log(textValid);
         fieldValidationErrors.text = textValid ? 'Заполнено': 'Заполните поле';
 				break;
 			case 'phone':
 				phoneValid = value.length >=11;
-				console.log(titleValid);
         fieldValidationErrors.phone = phoneValid ? 'Заполнено': 'Заполните поле';
+				break;
+			case 'city':
+				cityValid = value.length >0;
+        fieldValidationErrors.phone = cityValid ? 'Заполнено': 'Заполните поле';
         break;
       	default:
         break;
@@ -71,12 +77,13 @@ class EmptyForm extends Component {
   	this.setState({formErrors: fieldValidationErrors,
                     titleValid: titleValid,
 										textValid: textValid,
-										phoneValid: phoneValid
+										phoneValid: phoneValid,
+										cityValid:cityValid
                   }, this.validateForm);	
   }
   	validateForm() {
     	this.setState({formValid: this.state.titleValid &&
-                              this.state.textValid && this.state.phoneValid});
+                              this.state.textValid && this.state.phoneValid && this.state.cityValid});
   	}
 
     
@@ -93,7 +100,7 @@ class EmptyForm extends Component {
       var announArray = JSON.parse(localStorage.getItem("announcements") || []);
       announArray.unshift(announ);
       localStorage.setItem("announcements", JSON.stringify(announArray));
-      this.props.updateData(announArray);
+			this.props.updateData(announArray);
       this.setState({ title: '',
 											text: '',
 											phone: '',
@@ -101,15 +108,18 @@ class EmptyForm extends Component {
 											titleValid: false,
       								textValid: false,
 											phoneValid: false,
+											cityValid: true,
 											formErrors: {title:'Обязательное поле \nНе более 140 символов',
 												 					 text:'Не более 300 символов',
 												 					 phone:'Обязательное поле'},
 											formValid: false,
+
       })} else {
 				let fieldValidationErrors = this.state.formErrors;
 				if(e.target.title.value==='') (fieldValidationErrors.title = 'Заполните поле'); 
 				if(e.target.text.value==='') (fieldValidationErrors.text = 'Заполните поле');
 				if(e.target.phone.value==='') (fieldValidationErrors.phone = 'Заполните поле'); 
+				if(e.target.city.value==='') (fieldValidationErrors.city = 'Заполните поле'); 
 				this.setState({formErrors: fieldValidationErrors })
 			}
     }
@@ -153,7 +163,8 @@ class EmptyForm extends Component {
                 <FormErrors formErrors={this.state.formErrors.phone} />
             </div>
             <div className="form__field">
-							<div>
+							<div className="form__field">
+								<div>
                 <label htmlFor="city">Город</label> <br/>
                 <select className="oneline__field"  
                         name="city" 
@@ -165,6 +176,8 @@ class EmptyForm extends Component {
                     <option value="Хабаровск">Хабаровск</option>
                     <option value="Чебоксары">Чебоксары</option>
                 </select>
+								</div>
+								<FormErrors formErrors={this.state.formErrors.city} />
 								</div>
 	            </div>
             <div className="form__field">
