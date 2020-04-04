@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "jquery": "^3.4.1",
+    "prettier": "^2.0.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
@@ -12,11 +13,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "fix": "prettier --single-quote --tab-width 2  --trailing-comma es5 --write \"src/**/*.{ts,js,json,scss,css,jsx,tsx,html}\""
   },
   "eslintConfig": {
     "extends": "react-app"
   },
+  "lint-staged": {
+    "src/**/*.js": ["prettier --single-quote --trailing-comma es6 --write",
+      "git add"]},
   "browserslist": {
     "production": [
       ">0.2%",
